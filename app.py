@@ -12,7 +12,30 @@ uploaded_file = st.file_uploader("Upload CSV file", type=["csv"])
 if uploaded_file:
     df = pd.read_csv(uploaded_file)
 
-    scaled_data = scaler.transform(df)
+    feature_columns = [
+    'State',
+    'Account length',
+    'Area code',
+    'International plan',
+    'Voice mail plan',
+    'Number vmail messages',
+    'Total day minutes',
+    'Total day calls',
+    'Total day charge',
+    'Total eve minutes',
+    'Total eve calls',
+    'Total eve charge',
+    'Total night minutes',
+    'Total night calls',
+    'Total night charge',
+    'Total intl minutes',
+    'Total intl calls',
+    'Total intl charge'
+]
+
+X = df[feature_columns]
+
+scaled_data = scaler.transform(X)
     predictions = model.predict(scaled_data)
 
     df["Prediction"] = predictions
